@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<style type="text/css">
+	*{
+		padding: 0;
+		margin: 0;
+	}
+	.stage{
+		width: 250px;
+		height: 150px;
+		margin: 0 auto;
+		perspective: 1000px;
+	}
+	.img-list{
+		width: 100%;
+		height: 100%;
+		transform-style: preserve-3d;
+		position: relative;
+		transition: all 300ms ease;
+	}
+	.item{
+		width: 100%;
+		height: 100%;
+		border: 1px solid #969696;
+		transform: rotateY(0deg) translateZ(100px);
+		list-style: none;
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+	.item img{
+		width: 100%;
+		height: 100%;
+	}
+
+	</style>
+	<title>css-3d</title>
+</head>
+<body>
+	<div class="stage">
+		<ul class="img-list">
+			<li class="item"><img src="assets/timg1.jpg" alt=""></li>
+			<li class="item"><img src="assets/timg2.jpg" alt=""></li>
+			<li class="item"><img src="assets/timg3.jpg" alt=""></li>
+			<li class="item"><img src="assets/timg4.jpg" alt=""></li>
+			<li class="item"><img src="assets/timg1.jpg" alt=""></li>
+			<li class="item"><img src="assets/timg2.jpg" alt=""></li>
+			<li class="item"><img src="assets/timg3.jpg" alt=""></li>
+			<li class="item"><img src="assets/timg4.jpg" alt=""></li>
+
+		</ul>
+	</div>
+	<script type="text/javascript">
+		var imgList = document.getElementsByClassName("img-list")[0];
+		var items = imgList.getElementsByClassName("item");
+		var itemsNum = items.length;
+		var itemW = items[0].clientWidth;
+		var rotateY =  Math.PI / itemsNum;
+		var translateZ =  Math.round((itemW / 2)/(Math.tan(rotateY)));
+		for(var j = 0, length2 = items.length; j < length2; j++){
+			var item = items[j];
+			item.style.transform = "rotateY("+Math.round(360/itemsNum)*j +"deg) translateZ("+(translateZ+30)+"px)";
+			item.style.WebkitTransform = "rotateY("+Math.round(360/itemsNum)*j +"deg) translateZ("+(translateZ+30)+"px)";
+		}
+		var currentIndex = 0,timeOutId ;
+		timeOutId = setInterval(timeTick, 2000);
+		function timeTick () {
+			currentIndex ++;
+			if (true) {}
+			imgList.style.transform = "rotateY("+Math.round(360/itemsNum)*currentIndex + "deg)";
+		}
+	</script>
+</body>
+</html>
